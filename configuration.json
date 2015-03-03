@@ -1,0 +1,73 @@
+{
+    "drop_old_db": true,
+    "db": {
+        "host": "localhost",
+        "name": "q-and-a",
+        "user": "root",
+        "password": "password"
+    },
+    "web": {
+        "dir_root": "api",
+        "url_root": "/",
+        "assets": "assets"
+    },
+    "models": [
+        {
+            "name": "user",
+            "belongs_to": ["role"],
+            "use_as_auth": true,
+            "properties": [
+                {
+                    "name": "email",
+                    "type": "string",
+                    "max_length": 255,
+                    "use_as_id": true,
+                    "validation": "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+                },
+                {
+                    "name": "password",
+                    "type": "hash",
+                    "use_as_password": true
+                },
+                {
+                    "name": "first_name",
+                    "type": "string",
+                    "max_length": 255
+                },
+                {
+                    "name": "family_name",
+                    "type": "string",
+                    "max_length": 255
+                }
+            ]
+        },
+        {
+            "name": "role",
+            "properties": [
+                {
+                    "name": "type",
+                    "type": ["user", "moderator", "admin"]
+                }
+            ]
+        },
+        {
+            "name": "entry",
+            "belongs_to": ["user"],
+            "properties": [
+                {
+                    "name": "text",
+                    "type": "string"
+                },
+                {
+                    "name": "created",
+                    "type": "datetime"
+                },
+                {
+                    "name": "type",
+                    "type": ["learned", "contributed", "enjoyed"]
+                }
+            ]
+        }
+    ],
+    "salt": [2, 3, 5, 7, 8, 13, 14, 20]
+}
