@@ -9,16 +9,21 @@ html, body {
 }
 
 .icon {
-  color: transparent;
-  text-shadow: 0 6px 12px rgba(255, 255, 255, 0.5);
-  background-color: rgba(0, 0, 0, 0.9);
-  -webkit-background-clip: text;
-     -moz-background-clip: text;
-          background-clip: text;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    text-align: center;
+    color: transparent;
+    text-shadow: 0 6px 12px rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.9);
+    -webkit-background-clip: text;
+       -moz-background-clip: text;
+            background-clip: text;
 }
 
 .icon-big {
-    font-size: 20rem;
+    font-size: 10rem;
 }
 
 .fa-heart:hover {
@@ -33,3 +38,16 @@ html, body {
   background-color: rgba(250, 166, 26, 1);
 }
 
+.text-accent {
+    color: rgba(237, 20, 90, 1);
+}
+
+.content {
+    width: 90%vw;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.content .title {
+
+}
