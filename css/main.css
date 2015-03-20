@@ -35,7 +35,7 @@ h1 {
 }
 
 .icon-big {
-    font-size: calc(25vmin;
+    font-size: calc((100vh - 4em) / 3);
 }
 
 .fa-rotate-45 {
