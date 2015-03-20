@@ -23,26 +23,13 @@ h1 {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 25%;
-    height: 25%;
+    width: 100%;
     text-align: center;
     color: rgb(100, 100, 100);
-    /*text-shadow: 0 6px 12px rgba(255, 255, 255, 0.5);*/
-    /*background-color: rgba(0, 0, 0, 0.9);*/
-    /*-webkit-background-clip: text;*/
-       /*-moz-background-clip: text;*/
-            /*background-clip: text;*/
 }
 
 .icon-big {
-    font-size: calc((100vh - 4em) / 3);
-}
-
-.fa-rotate-45 {
-    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0.5);
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
+    font-size: calc((100vh - 6em) / 3);
 }
 
 .fa-heart:hover {
@@ -91,6 +78,27 @@ h1 {
     padding-right: 5%;
 }
 
-.content .title {
+.comment_for_today {
+    position: absolute;
+    bottom: 1em;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    height: calc(66vh - 6em);
 
+    background-color: white;
+}
+
+.comment_for_today ::before {
+    content: '';
+    background-color: red;
+    
+}
+
+.comment_for_today .title {
+    background-color: grey;
+}
+
+.comment_for_today .comment {
+    height: 66vh;
 }
