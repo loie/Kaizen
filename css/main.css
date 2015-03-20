@@ -84,19 +84,24 @@ h1 {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-    height: calc(66vh - 6em);
+    height: calc(66vh - 5em);
 
     background-color: white;
 }
 
-.comment_for_today ::before {
-    content: '';
-    background-color: red;
-    
+.comment_for_today::before {
+    content: ' ';
+    width: 2em;
+    height: 2em;
+    display: block;
+    background-color: gray;
+    margin-left: auto;
+    margin-right: auto;
+    transform: rotate(45deg);
 }
 
 .comment_for_today .title {
-    background-color: grey;
+    background-color: gray;
 }
 
 .comment_for_today .comment {
