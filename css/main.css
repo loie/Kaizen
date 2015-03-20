@@ -9,11 +9,22 @@ html, body {
     color: rgb(40, 40, 40);
 }
 
+h1 {
+    display: block;
+    font-size: 2em;
+    -webkit-margin-before: 0.67em;
+    -webkit-margin-after: 0.67em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+}
+
 .icon {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 80%;
+    width: 25%;
+    height: 25%;
     text-align: center;
     color: rgb(100, 100, 100);
     /*text-shadow: 0 6px 12px rgba(255, 255, 255, 0.5);*/
@@ -24,26 +35,26 @@ html, body {
 }
 
 .icon-big {
-    font-size: 10rem;
+    font-size: calc(25vmin;
 }
 
 .fa-rotate-45 {
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0.5);
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0.5);
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 
 .fa-heart:hover {
-  color: rgba(237, 20, 90, 1);
+    color: rgba(237, 20, 90, 1);
 }
 
 .fa-arrow-up:hover {
-  color: rgba(0, 192, 243, 1);
+    color: rgba(0, 192, 243, 1);
 }
 
 .fa-lightbulb-o:hover {
-  color: rgba(250, 166, 26, 1);
+    color: rgba(250, 166, 26, 1);
 }
 
 .text-accent {
@@ -51,31 +62,27 @@ html, body {
 }
 
 .menu {
-  position: absolute;
-  top: 1.5em;
-  right: 5%;
-  height: 2em;
-  width: 2em;
-  transition: all 0.5s;
-  
+    position: absolute;
+    top: 1.5em;
+    right: 5%;
+    height: 2em;
+    width: 2em;
 }
 
 .menu svg {
-  height: 2em;
-  width: 2em;
+    height: 2em;
+    width: 2em;
 }
 
 .menu path {
-  stroke: rgb(40, 40, 40);
-  -webkit-transition-delay: 0s;
-  -webkit-transition-duration: 0.3s;
-  -webkit-transition-property: all;
-  -webkit-transition-timing-function: ease-out;
+    stroke: rgb(40, 40, 40);
+    -webkit-transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+    transition:         all 300ms cubic-bezier(0.23, 1, 0.32, 1);;
 }
 
 .menu:hover path {
-  stroke: rgba(237, 20, 90, 1);
-  stroke-width: 10px;
+    stroke: rgba(237, 20, 90, 1);
+    stroke-width: 10px;
 }
 
 .content {
