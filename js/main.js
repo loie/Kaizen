@@ -15,7 +15,21 @@ preparePage = function () {
 };
 
 selectArea = function (element) {
-    console.log(element.addClass("tierchen"));
+
+
+console.log("                ,;~;,");
+console.log("                /\_");
+console.log("               (  /");
+console.log("               (()      //)");
+console.log("               | \\  ,,;;'\ "); 
+console.log("           __ _(  )m=(((((((((((((================--------" );
+console.log("         /'  ' '()/~' '.(, |");
+console.log("      ,;(      )||     |  ~");
+console.log("     ,;' \    /-(.;,   )");
+console.log("          ) /       ) /"); 
+console.log("         //  PjP    ||");
+console.log("        )_\         )_\'");
+    // console.log(element.addClass("tierchen"));
 };
 
 
