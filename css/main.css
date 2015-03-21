@@ -73,12 +73,13 @@ h1 {
 }
 
 .content {
-    width: 90%vw;
+    width: 90%;
     padding-left: 5%;
     padding-right: 5%;
 }
 
 .comment_for_today {
+    box-sizing: border-box;
     position: absolute;
     bottom: 1em;
     width: 90%;
@@ -89,21 +90,38 @@ h1 {
     background-color: white;
 }
 
-.comment_for_today::before {
+.comment_for_today:before {
     content: ' ';
     width: 2em;
     height: 2em;
     display: block;
-    background-color: gray;
+    background-color: rgb(100, 100, 100);
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: -2.5em;
     transform: rotate(45deg);
 }
 
 .comment_for_today .title {
-    background-color: gray;
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    color: white;
+    padding: 0.5em 1em 0.5em;
+    margin: 0.5em auto 0;
+    text-align: center;
+    background-color: rgb(100, 100, 100);
+    z-index: 2;
+
 }
 
 .comment_for_today .comment {
-    height: 66vh;
+    box-sizing: border-box;
+    border: 1px solid rgb(100, 100, 100);
+    height: 40vh;
+    width: 100%;
+    margin-top: 0;
+    padding: 0.5em;
+
+    font-size: 200%;
 }
