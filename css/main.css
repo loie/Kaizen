@@ -7,6 +7,7 @@ html, body {
 
     font-family: sans-serif;
     color: rgb(40, 40, 40);
+    overflow-y: hidden;
 }
 
 h1 {
@@ -88,6 +89,9 @@ h1 {
     height: calc(66vh - 5em);
 
     background-color: white;
+    will-change: transform;
+    transform: translateY(100vh);
+    opacity: 0;
 }
 
 .comment_for_today:before {
@@ -124,4 +128,9 @@ h1 {
     padding: 0.5em;
 
     font-size: 200%;
+}
+
+.comment_for_today.active {
+    opacity: 1;
+    transform: translateY(0);
 }
