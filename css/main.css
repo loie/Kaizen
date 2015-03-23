@@ -27,11 +27,25 @@ h1 {
     width: 100%;
     text-align: center;
     color: rgb(100, 100, 100);
+
+    -webkit-transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+    transition:         all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.icon.active {
+    opacity: 1;
+}
+
+.icon.inactive {
+    opacity: 0;
+    transform: scale(0);
 }
 
 .icon-big {
     font-size: calc((100vh - 6em) / 3);
 }
+
+.icon
 
 .fa-heart:hover {
     color: rgba(237, 20, 90, 1);
@@ -65,7 +79,7 @@ h1 {
 .menu path {
     stroke: rgb(40, 40, 40);
     -webkit-transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
-    transition:         all 300ms cubic-bezier(0.23, 1, 0.32, 1);;
+    transition:         all 300ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .menu:hover path {
@@ -92,9 +106,19 @@ h1 {
     will-change: transform;
     transform: translateY(100vh);
     opacity: 0;
+    pointer-events: none;
+
+    -webkit-transition: all 300ms 200ms cubic-bezier(0.23, 1, 0.32, 1);
+    transition:         all 300ms 200ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.comment_for_today:before {
+.comment_for_today.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+}
+
+.comment_for_today::before {
     content: ' ';
     width: 2em;
     height: 2em;
