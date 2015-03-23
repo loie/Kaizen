@@ -45,7 +45,26 @@ h1 {
     font-size: calc((100vh - 6em) / 3);
 }
 
-.icon
+.icon-learn.active {
+    color: rgba(237, 20, 90, 1);
+}
+.icon-learn.inactive {
+    transform: translateY(0);
+}
+
+.icon-improve.active {
+    color: rgba(237, 20, 90, 1);
+}
+.icon-improve.inactive {
+    transform: translateY(-20vh);
+}
+.icon-enjoy.active {
+    transform: translateY(calc(-1 * ((100vh + 6em) /3));
+    color: rgba(237, 20, 90, 1);
+}
+.icon-enjoy.inactive {
+    transform: translateY(-66vh);
+}
 
 .fa-heart:hover {
     color: rgba(237, 20, 90, 1);
