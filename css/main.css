@@ -62,7 +62,7 @@ h1 {
 }
 
 .icon-enjoy.active {
-    transform: translateY(calc(((100vh - 6.3em) / 3) * 2));
+    transform: translateY(calc(((100vh - 6.4em) / 3) * 2));
     color: rgba(237, 20, 90, 1);
 }
 
