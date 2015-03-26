@@ -43,7 +43,7 @@ h1 {
 }
 
 .icon-big {
-    font-size: calc((100vh - 6em) / 3);
+    width: calc((100vh - 6em) / 3);
 }
 
 .icon-learn.active {
