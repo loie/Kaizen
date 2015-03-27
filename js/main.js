@@ -1,6 +1,7 @@
 /*global window, console, document */
 var preparePage,
-    selectArea;
+    selectArea,
+    prepateContent;
 
 preparePage = function () {
     'use strict';
@@ -12,7 +13,7 @@ preparePage = function () {
             selectArea(event.toElement);
         });
     }
-
+    prepareContent();
     document.getElementById("cancel").addEventListener('click', unselectArea);
 };
 
@@ -55,6 +56,16 @@ unselectArea = function (element) {
     console.log(element);
 };
 
+prepareContent = function () {
+    var json,
+        entries;
+    json = window.localStorage.getItem('entries');
+    try {
+        entries = JSON.parse(json);
+    } catch (Error err) {
+        console.err(err)
+    }
+}
 
 
 window.addEventListener('load', preparePage);
