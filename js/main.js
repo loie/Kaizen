@@ -58,12 +58,18 @@ unselectArea = function (element) {
 
 prepareContent = function () {
     var json,
-        entries;
+        entries,
+        enjoyed = [],
+        learned = [],
+        improved = [];
     json = window.localStorage.getItem('entries');
     try {
         entries = JSON.parse(json);
     } catch (Error err) {
-        console.err(err)
+        console.err(err);
+    }
+    if (entries !== undefined) {
+        
     }
 }
 
