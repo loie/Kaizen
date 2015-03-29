@@ -69,7 +69,19 @@ prepareContent = function () {
         console.err(err);
     }
     if (entries !== undefined) {
-        
+        entries.forEach(function (entry) {
+            switch(entry.category) {
+            case 'enjoyed':
+                enjoyed.push(entry);
+                break;
+            case 'learned':
+                learned.push(entry);
+                break;
+            case 'improved':
+                improved.push(entry);
+                break;
+            }
+        })
     }
 }
 
