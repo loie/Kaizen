@@ -1,26 +1,24 @@
 /*global window, console, document */
+// var kaizen = function (window, document, undefined) {
+//     'use strict';
+//     var my = {};
+
+//     return my;
+// }(window, window.document);
+
 var preparePage,
+    selectAreaByEvent,
     selectArea,
-    prepateContent;
+    prepareContent,
+    unselectArea;
 
-preparePage = function () {
+selectArea = function (event) {
     'use strict';
-    var elements,
+    var element,
+        elements,
         i;
-    elements = document.getElementsByClassName('icon-big');
-    for (i = 0; i < elements.length; i += 1) {
-        elements[i].addEventListener('click', function (event) {
-            selectArea(event.toElement);
-        });
-    }
-    prepareContent();
-    document.getElementById("cancel").addEventListener('click', unselectArea);
-};
-
-selectArea = function (element) {
-    'use strict';
-    var elements,
-        i;
+    console.log(event);
+    element = event.toElement;
     element.classList.add('class');
     elements = document.getElementsByClassName('icon-big');
     for (i = 0; i < elements.length; i += 1) {
@@ -41,8 +39,8 @@ selectArea = function (element) {
     console.log("                /\\_");
     console.log("               (  /");
     console.log("               (()      //)");
-    console.log("               | \\  ,,;;'\ "); 
-    console.log("           __ _(  )m=(((((((((((((================--------" );
+    console.log("               | \\  ,,;;'\\"); 
+    console.log("           __ _(  )m=(((((((((((((================--------");
     console.log("         /'  ' '()/~' '.(, |");
     console.log("      ,;(      )||     |  ~");
     console.log("     ,;' \    /-(.;,   )");
@@ -57,20 +55,22 @@ unselectArea = function (element) {
 };
 
 prepareContent = function () {
+    'use strict';
     var json,
         entries,
         enjoyed = [],
         learned = [],
         improved = [];
+
     json = window.localStorage.getItem('entries');
     try {
         entries = JSON.parse(json);
-    } catch (Error err) {
-        console.err(err);
+    } catch (error) {
+        console.err(error);
     }
-    if (entries !== undefined) {
+    if (entries !== undefined && entries !== null) {
         entries.forEach(function (entry) {
-            switch(entry.category) {
+            switch (entry.category) {
             case 'enjoyed':
                 enjoyed.push(entry);
                 break;
@@ -81,9 +81,21 @@ prepareContent = function () {
                 improved.push(entry);
                 break;
             }
-        })
+        });
     }
-}
+};
+
+preparePage = function () {
+    'use strict';
+    var elements,
+        i;
+    elements = document.getElementsByClassName('icon-big');
+    for (i = 0; i < elements.length; i += 1) {
+        elements[i].addEventListener('click', selectArea);
+    }
+    prepareContent();
+    document.getElementById("cancel").addEventListener('click', unselectArea);
+};
 
 
 window.addEventListener('load', preparePage);
