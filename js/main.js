@@ -1,5 +1,5 @@
 /*global window, console, document */
-var Kaizen = (function (window, document, undefined) {
+var Kaizen = (function (window, document) {
     'use strict';
     var kaizen,
         selectArea,
@@ -13,7 +13,6 @@ var Kaizen = (function (window, document, undefined) {
         var element,
             elements,
             i;
-        console.log(event);
         element = event.toElement;
         element.classList.add('class');
         elements = document.getElementsByClassName('icon-big');
@@ -39,10 +38,10 @@ var Kaizen = (function (window, document, undefined) {
         console.log("           __ _(  )m=(((((((((((((================--------");
         console.log("         /'  ' '()/~' '.(, |");
         console.log("      ,;(      )||     |  ~");
-        console.log("     ,;' \    /-(.;,   )");
+        console.log("     ,;' \\    /-(.;,   )");
         console.log("          ) /       ) /"); 
         console.log("         //  PjP    ||");
-        console.log("        )_\         )_\'");
+        console.log("        )_\\         )_\'");
         // console.log(element.addClass("tierchen"));
     };
 
