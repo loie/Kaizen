@@ -19,22 +19,22 @@ var Kaizen = (function (window, document) {
     };
 
     selectArea = function (event) {
-        // var element,
-        //     elements,
-        //     i;
-        // console.log(event);
-        // element = event.toElement;
-        // element.classList.add('class');
-        // elements = document.getElementsByClassName('icon-big');
-        // for (i = 0; i < elements.length; i += 1) {
-        //     if (elements[i] === element) {
-        //         element.classList.add('active');
-        //     } else {
-        //         elements[i].classList.add('inactive');
-        //     }
-        // }
-        // document.getElementById('comment').classList.add('active');
-        // document.getElementById("kaizenElement").classList.remove('class');
+        var element,
+            elements,
+            i;
+        console.log(event);
+        element = event.toElement;
+        element.classList.add('class');
+        elements = document.getElementsByClassName('icon-big');
+        for (i = 0; i < elements.length; i += 1) {
+            if (elements[i] === element) {
+                element.classList.add('active');
+            } else {
+                elements[i].classList.add('inactive');
+            }
+        }
+        document.getElementById('comment').classList.add('active');
+        document.getElementById("kaizenElement").classList.remove('class');
 
         // if ( document.getElementById("kaizenElement").classList.contains('class') )
         // document.getElementById("kaizenElement").classList.toggle('class');
@@ -89,6 +89,11 @@ var Kaizen = (function (window, document) {
     // unselectArea = function (element) {
     //     console.log(element);
     // };
+    
+    // saveItem = function (category, description) {
+        
+    // }
+    
 
     return kaizen;
 }(window, window.document));
