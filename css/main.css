@@ -104,6 +104,7 @@ h1 {
 
 .text-accent {
     color: rgba(237, 20, 90, 1);
+    color: hsl(100, 60%, 50%);
 }
 
 .menu {
@@ -170,6 +171,8 @@ h1 {
     margin-right: auto;
     margin-bottom: -2.5em;
     transform: rotate(45deg);
+    top: -0.5em;
+    position: relative;
 }
 
 .comment_for_today .title {
@@ -191,6 +194,7 @@ h1 {
     height: 40vh;
     width: 100%;
     margin-top: 0;
+    margin-bottom: -4px;
     padding: 0.5em;
 
     font-size: 200%;
@@ -202,17 +206,23 @@ h1 {
 }
 
 .btn {
+    box-sizing: border-box;
     display: inline-block;
     text-decoration: none;
     color: white;
-    width: 50%;
+    width: 33%;
     padding: 1em 2em;
+    text-align: center;
+    margin: 0;
 }
 
 .btn-cancel {
-    background-color: hsl(352, 87%, 73%);
+    width: 35%;
+    color: rgba(237, 20, 90, 1);
+    background-color: white;
 }
 
 .btn-submit {
+    width: 65%;
     background-color: hsl(100, 60%, 50%);
 }

@@ -22,6 +22,7 @@ var Kaizen = (function (window, document) {
         var element,
             elements,
             i;
+
         
         element = event.toElement;
         elements = document.getElementsByClassName('icon-big');
@@ -79,6 +80,7 @@ var Kaizen = (function (window, document) {
             });
         }
     };
+
 
     unselectArea = function (element) {
         console.log(element);
