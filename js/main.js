@@ -14,7 +14,7 @@ var Kaizen = (function (window, document) {
                 elements[i].addEventListener('click', selectArea, true);
             }
             prepareContent();
-            // document.getElementById("cancel").addEventListener('click', unselectArea);
+            document.getElementById("cancel").addEventListener('click', unselectArea);
         }
     };
 
@@ -22,6 +22,7 @@ var Kaizen = (function (window, document) {
         var element,
             elements,
             i;
+        
         element = event.toElement;
         elements = document.getElementsByClassName('icon-big');
         for (i = 0; i < elements.length; i += 1) {
