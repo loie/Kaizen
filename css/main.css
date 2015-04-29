@@ -200,3 +200,19 @@ h1 {
     opacity: 1;
     transform: translateY(0);
 }
+
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    width: 50%;
+    padding: 1em 2em;
+}
+
+.btn-cancel {
+    background-color: hsl(352, 87%, 73%);
+}
+
+.btn-submit {
+    background-color: hsl(100, 60%, 50%);
+}
