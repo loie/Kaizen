@@ -94,4 +94,4 @@ var Kaizen = (function (window, document) {
 }(window, window.document));
 
 
-window.addEventListener('load', Kaizen.init);
+window.addEventListener('load', Kaizen.inits);
