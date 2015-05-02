@@ -4,7 +4,8 @@ var Kaizen = (function (window, document) {
     var kaizen,
         selectArea,
         prepareContent,
-        unselectArea;
+        unselectArea,
+        getAncestorByClassName;
     kaizen = {
         init: function () {
             var elements,
@@ -23,9 +24,8 @@ var Kaizen = (function (window, document) {
             elements,
             i;
 
-        
-        element = event.toElement;
-        elements = document.getElementsByClassName('icon-big');
+        element = getAncestorByClassName(event.toElement, 'icon');
+        elements = document.querySelectorAll('.icon');
         for (i = 0; i < elements.length; i += 1) {
             if (elements[i] === element) {
                 element.classList.add('active');
@@ -34,6 +34,7 @@ var Kaizen = (function (window, document) {
             }
         }
         document.getElementById('comment').classList.add('active');
+        
 
         console.log("                ,;~;,");
         console.log("                /\\_");
@@ -47,7 +48,6 @@ var Kaizen = (function (window, document) {
         console.log("          ) /       ) /"); 
         console.log("         //  PjP    ||");
         console.log("        )_\\         )_\'");
-        // console.log(element.addClass("tierchen"));
     };
 
 
@@ -82,9 +82,31 @@ var Kaizen = (function (window, document) {
     };
 
 
-    unselectArea = function (element) {
-        console.log(element);
+    unselectArea = function (event) {
+        var element = document.querySelector('#comment'),
+            icons = document.querySelectorAll('.icon'),
+            i;
+
+        // remove from comment
+        element.classList.remove('active');
+
+        // remove from icons
+        for (i = 0; i < icons.length; i += 1) {
+            icons[i].classList.remove('active');
+        }
     };
+
+    getAncestorByClassName = function (node, className) {
+        var ancestor, iter;
+        iter = node;
+        while (iter.parentNode && !iter.classList.contains(className)) {
+            iter = iter.parentNode;
+        }
+        if (iter.classList.contains(className)) {
+            ancestor = iter;
+        }
+        return ancestor;
+    }
 
     return kaizen;
 }(window, window.document));
