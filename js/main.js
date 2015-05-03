@@ -5,7 +5,8 @@ var Kaizen = (function (window, document) {
         selectArea,
         prepareContent,
         unselectArea,
-        getAncestorByClassName;
+        getAncestorByClassName,
+        names;
     kaizen = {
         init: function () {
             var elements,
@@ -19,22 +20,34 @@ var Kaizen = (function (window, document) {
         }
     };
 
+    names = {
+        learned_title: "learned",
+        learned_content: "to cook a new meal, something about Spanish history",
+        improved_title: "improved",
+        improved_content: "the way we handle at business, my home interieur, my touch",
+        enjoyed_title: "enjoyed",
+        enjoyed_content: "a cup of great coffee, a beautiful sunset, quality time with kids"
+    };
+
     selectArea = function (event) {
         var element,
             elements,
-            i;
+            i,
+            type;
 
         element = getAncestorByClassName(event.toElement, 'icon');
         elements = document.querySelectorAll('.icon');
         for (i = 0; i < elements.length; i += 1) {
             if (elements[i] === element) {
                 element.classList.add('active');
+                type = element.dataset.type;
+                
             } else {
                 elements[i].classList.add('inactive');
             }
         }
         document.getElementById('comment').classList.add('active');
-        
+
 
         console.log("                ,;~;,");
         console.log("                /\\_");
@@ -81,8 +94,7 @@ var Kaizen = (function (window, document) {
         }
     };
 
-
-    unselectArea = function (event) {
+    unselectArea = function () {
         var element = document.querySelector('#comment'),
             icons = document.querySelectorAll('.icon'),
             i;
@@ -93,6 +105,7 @@ var Kaizen = (function (window, document) {
         // remove from icons
         for (i = 0; i < icons.length; i += 1) {
             icons[i].classList.remove('active');
+            icons[i].classList.remove('inactive');
         }
     };
 
