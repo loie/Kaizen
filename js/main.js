@@ -41,7 +41,6 @@ var Kaizen = (function (window, document) {
             if (elements[i] === element) {
                 element.classList.add('active');
                 type = element.dataset.type;
-                
             } else {
                 elements[i].classList.add('inactive');
             }
@@ -95,18 +94,31 @@ var Kaizen = (function (window, document) {
     };
 
     unselectArea = function () {
-        var element = document.querySelector('#comment'),
+        var className = 'unselect-action',
+            comment = document.querySelector('#comment'),
             icons = document.querySelectorAll('.icon'),
             i;
 
         // remove from comment
-        element.classList.remove('active');
+        comment.classList.add(className);
+        comment.classList.remove('active');
 
         // remove from icons
         for (i = 0; i < icons.length; i += 1) {
+            icons[i].classList.add(className);
             icons[i].classList.remove('active');
             icons[i].classList.remove('inactive');
         }
+        // on animation end
+        window.setTimeout(function () {
+            window.requestAnimationFrame(function () {
+                comment.classList.remove(className);
+                for (i = 0; i < icons.length; i += 1) {
+                    icons[i].classList.remove(className);
+                }
+            });
+        }, 400);
+
     };
 
     getAncestorByClassName = function (node, className) {

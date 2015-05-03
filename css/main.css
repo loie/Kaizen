@@ -225,3 +225,11 @@ h1 {
     width: 65%;
     background-color: hsl(100, 60%, 50%);
 }
+
+.icon.unselect-action {
+    transition-delay: 100ms;
+}
+
+.comment-for-today.unselect-action {
+    transition-delay: 0;
+}
