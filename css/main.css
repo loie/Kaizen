@@ -134,7 +134,7 @@ h1 {
     padding-right: 5%;
 }
 
-.comment_for_today {
+.comment-for-today {
     box-sizing: border-box;
     position: absolute;
     bottom: 0;
@@ -149,17 +149,17 @@ h1 {
     opacity: 0;
     pointer-events: none;
 
-    -webkit-transition: all 300ms 100ms cubic-bezier(0.23, 1, 0.32, 1);
-    transition:         all 300ms 100ms cubic-bezier(0.23, 1, 0.32, 1);
+    -webkit-transition: all 300ms 150ms cubic-bezier(0.23, 1, 0.32, 1);
+    transition:         all 300ms 150ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.comment_for_today.active {
+.comment-for-today.active {
     transform: translateY(0);
     opacity: 1;
     pointer-events: all;
 }
 
-.comment_for_today::before {
+.comment-for-today::before {
     content: ' ';
     width: 2em;
     height: 2em;
@@ -173,7 +173,7 @@ h1 {
     position: relative;
 }
 
-.comment_for_today .title {
+.comment-for-today .title {
     display: block;
     position: relative;
     box-sizing: border-box;
@@ -186,7 +186,7 @@ h1 {
 
 }
 
-.comment_for_today .comment {
+.comment-for-today .comment {
     box-sizing: border-box;
     border: 1px solid rgb(230, 230, 230);
     height: 20vh;
@@ -199,7 +199,7 @@ h1 {
     color: rgb(100, 100, 100);
 }
 
-.comment_for_today.active {
+.comment-for-today.active {
     opacity: 1;
     transform: translateY(0);
 }
@@ -227,9 +227,9 @@ h1 {
 }
 
 .icon.unselect-action {
-    transition-delay: 100ms;
+    transition-delay: 150ms;
 }
 
 .comment-for-today.unselect-action {
-    transition-delay: 0;
+    transition-delay: 0ms;
 }

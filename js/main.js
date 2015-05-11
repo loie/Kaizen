@@ -3,6 +3,8 @@ var Kaizen = (function (window, document) {
     'use strict';
     var kaizen,
         selectArea,
+        onIconAnimationEnd,
+        onCommentAnimationEnd,
         prepareContent,
         unselectArea,
         getAncestorByClassName,
@@ -14,8 +16,12 @@ var Kaizen = (function (window, document) {
             elements = document.getElementsByClassName('icon-container');
             for (i = 0; i < elements.length; i += 1) {
                 elements[i].addEventListener('click', selectArea, true);
+                elements[i].addEventListener('transitionend', onIconAnimationEnd, false);
+                elements[i].addEventListener('webkitTransitionEnd', onIconAnimationEnd, false);
             }
             prepareContent();
+            document.getElementById("comment").addEventListener('transitionend', onCommentAnimationEnd, false);
+            document.getElementById("comment").addEventListener('webkitTransitionEnd', onCommentAnimationEnd, false);
             document.getElementById("cancel").addEventListener('click', unselectArea);
         }
     };
@@ -26,7 +32,27 @@ var Kaizen = (function (window, document) {
         improved_title: "improved",
         improved_content: "the way we handle at business, my home interieur, my touch",
         enjoyed_title: "enjoyed",
-        enjoyed_content: "a cup of great coffee, a beautiful sunset, quality time with kids"
+        enjoyed_content: "a cup of great coffee, a beautiful sunset, quality time with kids",
+        UnselectActionClassName: 'unselect-action',
+    };
+
+    onIconAnimationEnd = function () {
+        var icons = document.querySelectorAll('.icon'),
+            i;        
+        for (i = 0; i < icons.length; i += 1) {
+            if (icons[i].classList.contains(names.UnselectActionClassName)) {
+                icons[i].classList.remove(names.UnselectActionClassName);
+            }
+        }
+    };
+
+    onCommentAnimationEnd = function (event) {
+        // console.log("erter");
+        var comment = event.target;
+        // var comment = document.querySelector('#comment');
+        if (comment.classList.contains(names.UnselectActionClassName)) {
+            comment.classList.remove(names.UnselectActionClassName);
+        }
     };
 
     selectArea = function (event) {
@@ -48,18 +74,18 @@ var Kaizen = (function (window, document) {
         document.getElementById('comment').classList.add('active');
 
 
-        console.log("                ,;~;,");
-        console.log("                /\\_");
-        console.log("               (  /");
-        console.log("               (()      //)");
-        console.log("               | \\  ,,;;'\\"); 
-        console.log("           __ _(  )m=(((((((((((((================--------");
-        console.log("         /'  ' '()/~' '.(, |");
-        console.log("      ,;(      )||     |  ~");
-        console.log("     ,;' \\    /-(.;,   )");
-        console.log("          ) /       ) /"); 
-        console.log("         //  PjP    ||");
-        console.log("        )_\\         )_\'");
+        // console.log("                ,;~;,");
+        // console.log("                /\\_");
+        // console.log("               (  /");
+        // console.log("               (()      //)");
+        // console.log("               | \\  ,,;;'\\"); 
+        // console.log("           __ _(  )m=(((((((((((((================--------");
+        // console.log("         /'  ' '()/~' '.(, |");
+        // console.log("      ,;(      )||     |  ~");
+        // console.log("     ,;' \\    /-(.;,   )");
+        // console.log("          ) /       ) /"); 
+        // console.log("         //  PjP    ||");
+        // console.log("        )_\\         )_\'");
     };
 
 
@@ -94,31 +120,20 @@ var Kaizen = (function (window, document) {
     };
 
     unselectArea = function () {
-        var className = 'unselect-action',
-            comment = document.querySelector('#comment'),
+        var comment = document.querySelector('#comment'),
             icons = document.querySelectorAll('.icon'),
             i;
 
         // remove from comment
-        comment.classList.add(className);
+        comment.classList.add(names.UnselectActionClassName);
         comment.classList.remove('active');
 
         // remove from icons
         for (i = 0; i < icons.length; i += 1) {
-            icons[i].classList.add(className);
+            icons[i].classList.add(names.UnselectActionClassName);
             icons[i].classList.remove('active');
             icons[i].classList.remove('inactive');
         }
-        // on animation end
-        window.setTimeout(function () {
-            window.requestAnimationFrame(function () {
-                comment.classList.remove(className);
-                for (i = 0; i < icons.length; i += 1) {
-                    icons[i].classList.remove(className);
-                }
-            });
-        }, 400);
-
     };
 
     getAncestorByClassName = function (node, className) {
