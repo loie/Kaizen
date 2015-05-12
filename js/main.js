@@ -47,9 +47,7 @@ var Kaizen = (function (window, document) {
     };
 
     onCommentAnimationEnd = function (event) {
-        // console.log("erter");
         var comment = event.target;
-        // var comment = document.querySelector('#comment');
         if (comment.classList.contains(names.UnselectActionClassName)) {
             comment.classList.remove(names.UnselectActionClassName);
         }
@@ -59,7 +57,11 @@ var Kaizen = (function (window, document) {
         var element,
             elements,
             i,
-            type;
+            type,
+            title,
+            titleTemplate,
+            placeholder,
+            placeholderTemplate;
 
         element = getAncestorByClassName(event.toElement, 'icon');
         elements = document.querySelectorAll('.icon');
@@ -67,6 +69,16 @@ var Kaizen = (function (window, document) {
             if (elements[i] === element) {
                 element.classList.add('active');
                 type = element.dataset.type;
+                title = document.querySelector('#comment .title');
+                if (title !== undefined) {
+                    titleTemplate = title.dataset.template;
+                    title.innerText = titleTemplate.replace('{{action}}', names[type + '_title']);
+                }
+                placeholder = document.querySelector('#comment .comment');
+                if (placeholder !== undefined) {
+                    placeholderTemplate = placeholder.dataset.template;
+                    placeholder.setAttribute('placeholder', placeholderTemplate.replace('{{things}}', names[type + '_content']));
+                }
             } else {
                 elements[i].classList.add('inactive');
             }
