@@ -5,6 +5,7 @@ var Kaizen = (function (window, document) {
         selectArea,
         onIconAnimationEnd,
         onCommentAnimationEnd,
+        saveEntry,
         prepareContent,
         unselectArea,
         getAncestorByClassName,
@@ -22,18 +23,22 @@ var Kaizen = (function (window, document) {
             prepareContent();
             document.getElementById("comment").addEventListener('transitionend', onCommentAnimationEnd, false);
             document.getElementById("comment").addEventListener('webkitTransitionEnd', onCommentAnimationEnd, false);
+            document.getElementById("form").addEventListener('submit', saveEntry, true);
             document.getElementById("cancel").addEventListener('click', unselectArea);
         }
     };
 
     names = {
+        Learned: 'learned',
+        Improved: 'improved',
+        Enjoyed: 'enjoyed',
+        UnselectActionClassName: 'unselect-action',
         learned_title: "learned",
         learned_content: "to cook a new meal, something about Spanish history",
         improved_title: "improved",
         improved_content: "the way we handle at business, my home interieur, my touch",
         enjoyed_title: "enjoyed",
-        enjoyed_content: "a cup of great coffee, a beautiful sunset, quality time with kids",
-        UnselectActionClassName: 'unselect-action',
+        enjoyed_content: "a cup of great coffee, a beautiful sunset, quality time with kids"
     };
 
     onIconAnimationEnd = function () {
@@ -103,32 +108,45 @@ var Kaizen = (function (window, document) {
 
     prepareContent = function () {
         var json,
-            entries,
+            entryNames,
             enjoyed = [],
             learned = [],
             improved = [];
 
-        json = window.localStorage.getItem('entries');
-        try {
-            entries = JSON.parse(json);
-        } catch (error) {
-            console.err(error);
-        }
-        if (entries !== undefined && entries !== null) {
-            entries.forEach(function (entry) {
-                switch (entry.category) {
-                case 'enjoyed':
-                    enjoyed.push(entry);
-                    break;
-                case 'learned':
-                    learned.push(entry);
-                    break;
-                case 'improved':
-                    improved.push(entry);
-                    break;
-                }
-            });
-        }
+        entryNames = [names.Learned, names.Improved, names.Enjoyed];
+        entryNames.forEach(function (entryName) {
+            var entries;
+            json = window.localStorage.getItem(entryNames);
+            try {
+                entries = JSON.parse(json);
+            } catch (error) {
+                console.error(error);
+            }
+            if (entries !== undefined && entries !== null) {
+                entries.forEach(function (entry) {
+                    switch (entry.category) {
+                    case 'enjoyed':
+                        enjoyed.push(entry);
+                        break;
+                    case 'learned':
+                        learned.push(entry);
+                        break;
+                    case 'improved':
+                        improved.push(entry);
+                        break;
+                    }
+                });
+            }
+        });
+    };
+
+    saveEntry = function () {
+        var value,
+            type,
+            textArea;
+
+        textArea = document.querySelector('textarea.comment');
+        textArea.
     };
 
     unselectArea = function () {

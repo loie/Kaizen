@@ -213,6 +213,7 @@ h1 {
     padding: 1em 2em;
     text-align: center;
     margin: 0;
+    border: 0;
 }
 
 .btn-cancel {
@@ -222,8 +223,9 @@ h1 {
 }
 
 .btn-submit {
-    width: 65%;
+    width: 63%;
     background-color: hsl(100, 60%, 50%);
+    font-size: medium;
 }
 
 .icon.unselect-action {
