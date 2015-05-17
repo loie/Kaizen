@@ -146,7 +146,8 @@ var Kaizen = (function (window, document) {
             textArea;
 
         textArea = document.querySelector('textarea.comment');
-        textArea.
+        value = textArea.value;
+        console.log(value);
     };
 
     unselectArea = function () {
