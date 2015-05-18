@@ -140,12 +140,17 @@ var Kaizen = (function (window, document) {
         });
     };
 
-    saveEntry = function () {
+    saveEntry = function (event) {
         var value,
             type,
             textArea;
 
+        event.preventDefault();
+
         textArea = document.querySelector('textarea.comment');
+        if (textArea instanceof Array && textArea.length > 0) {
+            textArea = textArea[0];
+        }
         value = textArea.value;
         console.log(value);
     };
