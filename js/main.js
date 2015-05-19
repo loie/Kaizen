@@ -142,7 +142,11 @@ var Kaizen = (function (window, document) {
 
     saveEntry = function (event) {
         var value,
+            object,
+            element,
             type,
+            savedValues,
+            today,
             textArea;
 
         event.preventDefault();
@@ -152,7 +156,22 @@ var Kaizen = (function (window, document) {
             textArea = textArea[0];
         }
         value = textArea.value;
-        console.log(value);
+        element = document.querySelector('.icon.active');
+        type = element.dataset.type;
+        savedValues = window.localStorage.getItem(type);
+        savedValues = JSON.parse(savedValues);
+        if (savedValues === null) {
+            savedValues = [];
+        }
+        today = new Date();
+        today.setHours(0, 0, 0, 0);
+        object = {
+            text: value,
+            date: today.valueOf()
+        };
+        savedValues.push(object);
+        window.localStorage.setItem(type, JSON.stringify(savedValues));
+        // console.log(type);
     };
 
     unselectArea = function () {
