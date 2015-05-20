@@ -172,7 +172,7 @@ var Kaizen = (function (window, document) {
             delete savedValues[today];
         }
         window.localStorage.setItem(type, JSON.stringify(savedValues));
-        this.unselectArea();
+        unselectArea();
     };
 
     unselectArea = function () {
