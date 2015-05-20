@@ -6,14 +6,42 @@ var Kaizen = (function (window, document) {
         onIconAnimationEnd,
         onCommentAnimationEnd,
         saveEntry,
-        prepareContent,
         unselectArea,
         getAncestorByClassName,
         names;
     kaizen = {
         init: function () {
             var elements,
-                i;
+                i,
+                timestamp,
+                items,
+                handleItemName;
+
+            handleItemName = function (name) {
+                var itemList,
+                    item,
+                    element;
+
+                itemList = items[name];
+                item = itemList[timestamp];
+                if (item !== undefined) {
+                    element = document.querySelector('.icon[data-type=' + name + ']');
+                    element.classList.add('filled');
+                }
+            };
+
+            timestamp = new Date();
+            timestamp.setHours(0, 0, 0, 0);
+            timestamp = timestamp.valueOf();
+
+            items = {};
+            items.learned = JSON.parse(window.localStorage.getItem('learned'));
+            items.improved = JSON.parse(window.localStorage.getItem('improved'));
+            items.enjoyed = JSON.parse(window.localStorage.getItem('enjoyed'));
+
+            Object.keys(items).forEach(handleItemName);
+
+            /* Add Listeners */
             elements = document.getElementsByClassName('icon-container');
             for (i = 0; i < elements.length; i += 1) {
                 elements[i].addEventListener('click', selectArea, true);
@@ -140,7 +168,11 @@ var Kaizen = (function (window, document) {
         today.setHours(0, 0, 0, 0);
         today = today.valueOf();
         savedValues[today] = value;
+        if (value === '') {
+            delete savedValues[today];
+        }
         window.localStorage.setItem(type, JSON.stringify(savedValues));
+        this.unselectArea();
     };
 
     unselectArea = function () {
