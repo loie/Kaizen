@@ -109,13 +109,29 @@ var Kaizen = (function (window, document) {
     prepareContent = function () {
         var json,
             entryNames,
+            handleEntryName,
             enjoyed = [],
             learned = [],
             improved = [];
 
         entryNames = [names.Learned, names.Improved, names.Enjoyed];
-        entryNames.forEach(function (entryName) {
-            var entries;
+        handleEntryName = function () {
+            var entries,
+                handleEntry;
+
+            handleEntry = function (entry) {
+                switch (entry.category) {
+                case 'enjoyed':
+                    enjoyed.push(entry);
+                    break;
+                case 'learned':
+                    learned.push(entry);
+                    break;
+                case 'improved':
+                    improved.push(entry);
+                    break;
+                }
+            };
             json = window.localStorage.getItem(entryNames);
             try {
                 entries = JSON.parse(json);
@@ -123,26 +139,15 @@ var Kaizen = (function (window, document) {
                 console.error(error);
             }
             if (entries !== undefined && entries !== null) {
-                entries.forEach(function (entry) {
-                    switch (entry.category) {
-                    case 'enjoyed':
-                        enjoyed.push(entry);
-                        break;
-                    case 'learned':
-                        learned.push(entry);
-                        break;
-                    case 'improved':
-                        improved.push(entry);
-                        break;
-                    }
-                });
+                entries.forEach(handleEntry);
             }
-        });
+        };
+
+        entryNames.forEach(handleEntryName);
     };
 
     saveEntry = function (event) {
         var value,
-            object,
             element,
             type,
             savedValues,
@@ -161,17 +166,13 @@ var Kaizen = (function (window, document) {
         savedValues = window.localStorage.getItem(type);
         savedValues = JSON.parse(savedValues);
         if (savedValues === null) {
-            savedValues = [];
+            savedValues = {};
         }
         today = new Date();
         today.setHours(0, 0, 0, 0);
-        object = {
-            text: value,
-            date: today.valueOf()
-        };
-        savedValues.push(object);
+        today = today.valueOf();
+        savedValues[today] = value;
         window.localStorage.setItem(type, JSON.stringify(savedValues));
-        // console.log(type);
     };
 
     unselectArea = function () {
