@@ -20,7 +20,6 @@ var Kaizen = (function (window, document) {
                 elements[i].addEventListener('transitionend', onIconAnimationEnd, false);
                 elements[i].addEventListener('webkitTransitionEnd', onIconAnimationEnd, false);
             }
-            prepareContent();
             document.getElementById("comment").addEventListener('transitionend', onCommentAnimationEnd, false);
             document.getElementById("comment").addEventListener('webkitTransitionEnd', onCommentAnimationEnd, false);
             document.getElementById("form").addEventListener('submit', saveEntry, true);
@@ -66,7 +65,9 @@ var Kaizen = (function (window, document) {
             title,
             titleTemplate,
             placeholder,
-            placeholderTemplate;
+            placeholderTemplate,
+            today,
+            valueForToday;
 
         element = getAncestorByClassName(event.toElement, 'icon');
         elements = document.querySelectorAll('.icon');
@@ -83,6 +84,14 @@ var Kaizen = (function (window, document) {
                 if (placeholder !== undefined) {
                     placeholderTemplate = placeholder.dataset.template;
                     placeholder.setAttribute('placeholder', placeholderTemplate.replace('{{things}}', names[type + '_content']));
+                    valueForToday = window.localStorage.getItem(type);
+                    valueForToday = JSON.parse(valueForToday);
+                    today = new Date();
+                    today.setHours(0, 0, 0, 0);
+                    valueForToday = valueForToday[today.valueOf()];
+                    if (valueForToday !== undefined) {
+                        placeholder.value = valueForToday;
+                    }
                 }
             } else {
                 elements[i].classList.add('inactive');
@@ -103,47 +112,6 @@ var Kaizen = (function (window, document) {
         // console.log("          ) /       ) /"); 
         // console.log("         //  PjP    ||");
         // console.log("        )_\\         )_\'");
-    };
-
-
-    prepareContent = function () {
-        var json,
-            entryNames,
-            handleEntryName,
-            enjoyed = [],
-            learned = [],
-            improved = [];
-
-        entryNames = [names.Learned, names.Improved, names.Enjoyed];
-        handleEntryName = function () {
-            var entries,
-                handleEntry;
-
-            handleEntry = function (entry) {
-                switch (entry.category) {
-                case 'enjoyed':
-                    enjoyed.push(entry);
-                    break;
-                case 'learned':
-                    learned.push(entry);
-                    break;
-                case 'improved':
-                    improved.push(entry);
-                    break;
-                }
-            };
-            json = window.localStorage.getItem(entryNames);
-            try {
-                entries = JSON.parse(json);
-            } catch (error) {
-                console.error(error);
-            }
-            if (entries !== undefined && entries !== null) {
-                entries.forEach(handleEntry);
-            }
-        };
-
-        entryNames.forEach(handleEntryName);
     };
 
     saveEntry = function (event) {
@@ -202,7 +170,7 @@ var Kaizen = (function (window, document) {
             ancestor = iter;
         }
         return ancestor;
-    }
+    };
 
     return kaizen;
 }(window, window.document));
