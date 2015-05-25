@@ -8,7 +8,8 @@ var Kaizen = (function (window, document) {
         saveEntry,
         unselectArea,
         getAncestorByClassName,
-        names;
+        names,
+        toggleHistory;
     kaizen = {
         init: function () {
             var elements,
@@ -23,10 +24,12 @@ var Kaizen = (function (window, document) {
                     element;
 
                 itemList = items[name];
-                item = itemList[timestamp];
-                if (item !== undefined) {
-                    element = document.querySelector('.icon[data-type=' + name + ']');
-                    element.classList.add('filled');
+                if (itemList !== null) {
+                    item = itemList[timestamp];
+                    if (item !== undefined) {
+                        element = document.querySelector('.icon[data-type=' + name + ']');
+                        element.classList.add('filled');
+                    }
                 }
             };
 
@@ -52,6 +55,7 @@ var Kaizen = (function (window, document) {
             document.getElementById("comment").addEventListener('webkitTransitionEnd', onCommentAnimationEnd, false);
             document.getElementById("form").addEventListener('submit', saveEntry, true);
             document.getElementById("cancel").addEventListener('click', unselectArea);
+            document.getElementById("hamburger").addEventListener('click', toggleHistory);
         }
     };
 
@@ -116,9 +120,13 @@ var Kaizen = (function (window, document) {
                     valueForToday = JSON.parse(valueForToday);
                     today = new Date();
                     today.setHours(0, 0, 0, 0);
-                    valueForToday = valueForToday[today.valueOf()];
-                    if (valueForToday !== undefined) {
-                        placeholder.value = valueForToday;
+                    if (valueForToday === null) {
+                        placeholder.value = '';
+                    } else {
+                        valueForToday = valueForToday[today.valueOf()];
+                        if (valueForToday !== undefined) {
+                            placeholder.value = valueForToday;
+                        }
                     }
                 }
             } else {
@@ -202,6 +210,16 @@ var Kaizen = (function (window, document) {
             ancestor = iter;
         }
         return ancestor;
+    };
+
+    toggleHistory = function (event) {
+        var areas,
+            history;
+        event.preventDefault();
+        areas = document.querySelector('.areas');
+        history = document.querySelector('.history');
+        areas.classList.toggle('hidden');
+        history.classList.toggle('hidden');
     };
 
     return kaizen;
