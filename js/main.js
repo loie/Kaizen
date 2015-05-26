@@ -213,12 +213,12 @@ var Kaizen = (function (window, document) {
     };
 
     toggleHistory = function (event) {
-        var areas,
+        var today,
             history;
         event.preventDefault();
-        areas = document.querySelector('.areas');
+        today = document.querySelector('.today');
         history = document.querySelector('.history');
-        areas.classList.toggle('hidden');
+        today.classList.toggle('hidden');
         history.classList.toggle('hidden');
     };
 
