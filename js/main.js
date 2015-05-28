@@ -27,7 +27,7 @@ var Kaizen = (function (window, document) {
                 if (itemList !== null) {
                     item = itemList[timestamp];
                     if (item !== undefined) {
-                        element = document.querySelector('.icon[data-type=' + name + ']');
+                        element = document.querySelector('.areas .icon[data-type=' + name + ']');
                         element.classList.add('filled');
                     }
                 }
@@ -73,7 +73,7 @@ var Kaizen = (function (window, document) {
     };
 
     onIconAnimationEnd = function () {
-        var icons = document.querySelectorAll('.icon'),
+        var icons = document.querySelectorAll('.areas .icon'),
             i;        
         for (i = 0; i < icons.length; i += 1) {
             if (icons[i].classList.contains(names.UnselectActionClassName)) {
@@ -102,7 +102,7 @@ var Kaizen = (function (window, document) {
             valueForToday;
 
         element = getAncestorByClassName(event.toElement, 'icon');
-        elements = document.querySelectorAll('.icon');
+        elements = document.querySelectorAll('.areas .icon');
         for (i = 0; i < elements.length; i += 1) {
             if (elements[i] === element) {
                 element.classList.add('active');
@@ -185,7 +185,7 @@ var Kaizen = (function (window, document) {
 
     unselectArea = function () {
         var comment = document.querySelector('#comment'),
-            icons = document.querySelectorAll('.icon'),
+            icons = document.querySelectorAll('.areas .icon'),
             i;
 
         // remove from comment

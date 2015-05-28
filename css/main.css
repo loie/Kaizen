@@ -41,6 +41,12 @@ h1 {
     height: calc((100vh - 6em) / 2);
 }
 
+.icon.icon-medium {
+    width: 5em;
+    height: 5em;
+}
+
+
 .icon path {
     fill: rgb(100, 100, 100);
     -webkit-transition: fill 300ms cubic-bezier(0.23, 1, 0.32, 1),
@@ -264,3 +270,11 @@ h1 {
     transform: translateX(-100vw);
 }
 
+.media {
+    display: block;
+}
+
+.media-img {
+    display: block;
+    float: left;
+}
