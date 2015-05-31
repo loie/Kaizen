@@ -10,7 +10,6 @@ var Kaizen = (function (window, document) {
         getAncestorByClassName,
         names,
         toggleHistory,
-        fillHistory,
         items;
 
     items = {};
@@ -22,17 +21,40 @@ var Kaizen = (function (window, document) {
                 handleItemName;
 
             handleItemName = function (name) {
-                var itemList,
-                    item,
-                    element;
+                var itemMap,
+                    element,
+                    handleItemMap,
+                    keys;
 
-                itemList = items[name];
-                if (itemList !== null) {
-                    item = itemList[timestamp];
+                itemMap = items[name];
+                handleItemMap = function (timestamp) {
+                    var item,
+                        template,
+                        date,
+                        content,
+                        contentText,
+                        containerElement;
+                    item = itemMap[timestamp];
                     if (item !== undefined) {
                         element = document.querySelector('.areas .icon[data-type=' + name + ']');
                         element.classList.add('filled');
                     }
+                    template = document.querySelector('#template-content');
+                    template = template.dateSet.template;
+                    date = new Date(parseInt(timestamp, 10));
+                    console.log(date.toLocaleDateString());
+                    content = document.createElement('div');
+                    contentText = template.replace('{{date}}', date.toLocaleDateString());
+                    contentText = contentText.replace('{{content}}', item);
+                    content.innerHTML = contentText;
+                    console.log(name);
+                    containerElement = document.querySelector('.' + name + '-history');
+                    containerElement.appendChild(content);
+                };
+                if (itemMap !== null) {
+                    keys = Object.keys(itemMap);
+                    keys.sort().reverse();
+                    keys.forEach(handleItemMap);
                 }
             };
 
@@ -58,7 +80,6 @@ var Kaizen = (function (window, document) {
             document.getElementById("form").addEventListener('submit', saveEntry, true);
             document.getElementById("cancel").addEventListener('click', unselectArea);
             document.getElementById("hamburger").addEventListener('click', toggleHistory);
-            fillHistory();
         }
     };
 
@@ -225,9 +246,6 @@ var Kaizen = (function (window, document) {
         history.classList.toggle('hidden');
     };
 
-    fillHistory = function () {
-        
-    };
 
     return kaizen;
 }(window, window.document));
