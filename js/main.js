@@ -9,13 +9,16 @@ var Kaizen = (function (window, document) {
         unselectArea,
         getAncestorByClassName,
         names,
-        toggleHistory;
+        toggleHistory,
+        fillHistory,
+        items;
+
+    items = {};
     kaizen = {
         init: function () {
             var elements,
                 i,
                 timestamp,
-                items,
                 handleItemName;
 
             handleItemName = function (name) {
@@ -37,7 +40,6 @@ var Kaizen = (function (window, document) {
             timestamp.setHours(0, 0, 0, 0);
             timestamp = timestamp.valueOf();
 
-            items = {};
             items.learned = JSON.parse(window.localStorage.getItem('learned'));
             items.improved = JSON.parse(window.localStorage.getItem('improved'));
             items.enjoyed = JSON.parse(window.localStorage.getItem('enjoyed'));
@@ -56,6 +58,7 @@ var Kaizen = (function (window, document) {
             document.getElementById("form").addEventListener('submit', saveEntry, true);
             document.getElementById("cancel").addEventListener('click', unselectArea);
             document.getElementById("hamburger").addEventListener('click', toggleHistory);
+            fillHistory();
         }
     };
 
@@ -220,6 +223,10 @@ var Kaizen = (function (window, document) {
         history = document.querySelector('.history');
         today.classList.toggle('hidden');
         history.classList.toggle('hidden');
+    };
+
+    fillHistory = function () {
+        
     };
 
     return kaizen;
