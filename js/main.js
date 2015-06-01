@@ -40,10 +40,10 @@ var Kaizen = (function (window, document) {
                         element.classList.add('filled');
                     }
                     template = document.querySelector('#template-content');
-                    template = template.dateSet.template;
+                    template = template.dataset.templatetext;
                     date = new Date(parseInt(timestamp, 10));
                     console.log(date.toLocaleDateString());
-                    content = document.createElement('div');
+                    content = document.createElement('tr');
                     contentText = template.replace('{{date}}', date.toLocaleDateString());
                     contentText = contentText.replace('{{content}}', item);
                     content.innerHTML = contentText;

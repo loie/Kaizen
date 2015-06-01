@@ -308,3 +308,8 @@ hr.light {
     border-top: 1px solid red;
     /* height: 1px; */
 }
+
+.history-table td {
+    color: rgb(128, 128, 128);
+    padding: 0.5em 1em;
+}
