@@ -10,77 +10,85 @@ var Kaizen = (function (window, document) {
         getAncestorByClassName,
         names,
         toggleHistory,
-        items;
+        items,
+        updateContent,
+        registerListeners;
 
     items = {};
     kaizen = {
         init: function () {
-            var elements,
-                i,
-                timestamp,
-                handleItemName;
-
-            handleItemName = function (name) {
-                var itemMap,
-                    element,
-                    handleItemMap,
-                    keys;
-
-                itemMap = items[name];
-                handleItemMap = function (timestamp) {
-                    var item,
-                        template,
-                        date,
-                        content,
-                        contentText,
-                        containerElement;
-                    item = itemMap[timestamp];
-                    if (item !== undefined) {
-                        element = document.querySelector('.areas .icon[data-type=' + name + ']');
-                        element.classList.add('filled');
-                    }
-                    template = document.querySelector('#template-content');
-                    template = template.dataset.templatetext;
-                    date = new Date(parseInt(timestamp, 10));
-                    console.log(date.toLocaleDateString());
-                    content = document.createElement('tr');
-                    contentText = template.replace('{{date}}', date.toLocaleDateString());
-                    contentText = contentText.replace('{{content}}', item);
-                    content.innerHTML = contentText;
-                    console.log(name);
-                    containerElement = document.querySelector('.' + name + '-history');
-                    containerElement.appendChild(content);
-                };
-                if (itemMap !== null) {
-                    keys = Object.keys(itemMap);
-                    keys.sort().reverse();
-                    keys.forEach(handleItemMap);
-                }
-            };
-
-            timestamp = new Date();
-            timestamp.setHours(0, 0, 0, 0);
-            timestamp = timestamp.valueOf();
-
-            items.learned = JSON.parse(window.localStorage.getItem('learned'));
-            items.improved = JSON.parse(window.localStorage.getItem('improved'));
-            items.enjoyed = JSON.parse(window.localStorage.getItem('enjoyed'));
-
-            Object.keys(items).forEach(handleItemName);
-
-            /* Add Listeners */
-            elements = document.getElementsByClassName('icon-container');
-            for (i = 0; i < elements.length; i += 1) {
-                elements[i].addEventListener('click', selectArea, true);
-                elements[i].addEventListener('transitionend', onIconAnimationEnd, false);
-                elements[i].addEventListener('webkitTransitionEnd', onIconAnimationEnd, false);
-            }
-            document.getElementById("comment").addEventListener('transitionend', onCommentAnimationEnd, false);
-            document.getElementById("comment").addEventListener('webkitTransitionEnd', onCommentAnimationEnd, false);
-            document.getElementById("form").addEventListener('submit', saveEntry, true);
-            document.getElementById("cancel").addEventListener('click', unselectArea);
-            document.getElementById("hamburger").addEventListener('click', toggleHistory);
+            registerListeners();
+            updateContent();
         }
+    };
+
+    registerListeners = function () {
+        var elements,
+            i;
+        /* Add Listeners */
+        elements = document.getElementsByClassName('icon-container');
+        for (i = 0; i < elements.length; i += 1) {
+            elements[i].addEventListener('click', selectArea, true);
+            elements[i].addEventListener('transitionend', onIconAnimationEnd, false);
+            elements[i].addEventListener('webkitTransitionEnd', onIconAnimationEnd, false);
+        }
+        document.getElementById("comment").addEventListener('transitionend', onCommentAnimationEnd, false);
+        document.getElementById("comment").addEventListener('webkitTransitionEnd', onCommentAnimationEnd, false);
+        document.getElementById("form").addEventListener('submit', saveEntry, true);
+        document.getElementById("cancel").addEventListener('click', unselectArea);
+        document.getElementById("hamburger").addEventListener('click', toggleHistory);
+    };
+
+    updateContent = function () {
+        var handleItemName,
+            timestamp;
+        handleItemName = function (name) {
+            var itemMap,
+                element,
+                handleItemMap,
+                keys,
+                containerElement;
+
+            itemMap = items[name];
+            containerElement = document.querySelector('.' + name + '-history');
+
+            handleItemMap = function (timestamp) {
+                var item,
+                    template,
+                    date,
+                    content,
+                    contentText;
+                item = itemMap[timestamp];
+                if (item !== undefined) {
+                    element = document.querySelector('.areas .icon[data-type=' + name + ']');
+                    element.classList.add('filled');
+                }
+                template = document.querySelector('#template-content');
+                template = template.dataset.templatetext;
+                date = new Date(parseInt(timestamp, 10));
+                console.log(date.toLocaleDateString());
+                content = document.createElement('tr');
+                contentText = template.replace('{{date}}', date.toLocaleDateString());
+                contentText = contentText.replace('{{content}}', item);
+                content.innerHTML = contentText;
+                containerElement.appendChild(content);
+            };
+            if (itemMap !== null) {
+                keys = Object.keys(itemMap);
+                keys.sort().reverse();
+                containerElement.innerHTML = '';
+                keys.forEach(handleItemMap);
+            }
+        };
+        timestamp = new Date();
+        timestamp.setHours(0, 0, 0, 0);
+        timestamp = timestamp.valueOf();
+
+        items.learned = JSON.parse(window.localStorage.getItem('learned'));
+        items.improved = JSON.parse(window.localStorage.getItem('improved'));
+        items.enjoyed = JSON.parse(window.localStorage.getItem('enjoyed'));
+
+        Object.keys(items).forEach(handleItemName);
     };
 
     names = {
@@ -98,7 +106,7 @@ var Kaizen = (function (window, document) {
 
     onIconAnimationEnd = function () {
         var icons = document.querySelectorAll('.areas .icon'),
-            i;        
+            i;
         for (i = 0; i < icons.length; i += 1) {
             if (icons[i].classList.contains(names.UnselectActionClassName)) {
                 icons[i].classList.remove(names.UnselectActionClassName);
@@ -205,6 +213,7 @@ var Kaizen = (function (window, document) {
         }
         window.localStorage.setItem(type, JSON.stringify(savedValues));
         unselectArea();
+        updateContent();
     };
 
     unselectArea = function () {

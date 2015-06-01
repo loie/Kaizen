@@ -313,3 +313,9 @@ hr.light {
     color: rgb(128, 128, 128);
     padding: 0.5em 1em;
 }
+
+.history-table td:first-child {
+  width: 3.5em;
+  padding-left: 0;
+  padding-right: 0;
+}
