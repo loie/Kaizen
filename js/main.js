@@ -41,16 +41,14 @@ var Kaizen = (function (window, document) {
 
     updateContent = function () {
         var handleItemName,
-            timestamp;
+            todayTimestamp;
         handleItemName = function (name) {
             var itemMap,
                 element,
                 handleItemMap,
                 keys,
-                containerElement;
-
-            itemMap = items[name];
-            containerElement = document.querySelector('.' + name + '-history');
+                containerElement,
+                todayFound;
 
             handleItemMap = function (timestamp) {
                 var item,
@@ -59,30 +57,40 @@ var Kaizen = (function (window, document) {
                     content,
                     contentText;
                 item = itemMap[timestamp];
-                if (item !== undefined) {
-                    element = document.querySelector('.areas .icon[data-type=' + name + ']');
-                    element.classList.add('filled');
+                if (timestamp === todayTimestamp) {
+                    if (item !== undefined && item !== '') {
+                        todayFound = true;
+                    }
                 }
                 template = document.querySelector('#template-content');
                 template = template.dataset.templatetext;
                 date = new Date(parseInt(timestamp, 10));
-                console.log(date.toLocaleDateString());
                 content = document.createElement('tr');
                 contentText = template.replace('{{date}}', date.toLocaleDateString());
                 contentText = contentText.replace('{{content}}', item);
                 content.innerHTML = contentText;
                 containerElement.appendChild(content);
             };
+            itemMap = items[name];
+            containerElement = document.querySelector('.' + name + '-history');
+            todayFound = false;
+
             if (itemMap !== null) {
                 keys = Object.keys(itemMap);
                 keys.sort().reverse();
                 containerElement.innerHTML = '';
                 keys.forEach(handleItemMap);
             }
+            element = document.querySelector('.areas .icon[data-type=' + name + ']');
+            if (todayFound) {
+                element.classList.add('filled');
+            } else {
+                element.classList.remove('filled');
+            }
         };
-        timestamp = new Date();
-        timestamp.setHours(0, 0, 0, 0);
-        timestamp = timestamp.valueOf();
+        todayTimestamp = new Date();
+        todayTimestamp.setHours(0, 0, 0, 0);
+        todayTimestamp = todayTimestamp.valueOf();
 
         items.learned = JSON.parse(window.localStorage.getItem('learned'));
         items.improved = JSON.parse(window.localStorage.getItem('improved'));
@@ -158,6 +166,8 @@ var Kaizen = (function (window, document) {
                         valueForToday = valueForToday[today.valueOf()];
                         if (valueForToday !== undefined) {
                             placeholder.value = valueForToday;
+                        } else {
+                            placeholder.value = '';
                         }
                     }
                 }
