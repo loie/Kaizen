@@ -57,7 +57,7 @@ var Kaizen = (function (window, document) {
                     content,
                     contentText;
                 item = itemMap[timestamp];
-                if (timestamp === todayTimestamp) {
+                if (parseInt(timestamp, 10) === todayTimestamp) {
                     if (item !== undefined && item !== '') {
                         todayFound = true;
                     }
